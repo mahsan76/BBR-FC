@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBR-FC Convergence Statistics</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f5f0;
+    --surface: #ffffff;
+    --accent: #2d6a4f;
+    --accent-light: #e8f5ee;
+    --text: #1a1d23;
+    --text-muted: #6b7280;
+    --border: #cdddd6;
+    --row-alt: #f7faf8;
+    --header-bg: #2d6a4f;
+    --header-text: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 40px 32px;
+    min-height: 100vh;
+  }
+  .page-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .page-subtitle {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 36px;
+    border-left: 4px solid var(--accent);
+    padding-left: 14px;
+  }
+  .table-block {
+    margin-bottom: 40px;
+    background: var(--surface);
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(45,106,79,0.07), 0 4px 20px rgba(0,0,0,0.05);
+    overflow: hidden;
+  }
+  .table-label {
+    padding: 16px 24px 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .table-label .badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #fff;
+    padding: 2px 9px;
+    border-radius: 4px;
+  }
+  .table-label .title-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .table-label .meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    margin-left: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  thead tr { background: var(--header-bg); color: var(--header-text); }
+  thead th {
+    padding: 11px 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  thead th:first-child { text-align: left; }
+  tbody tr:nth-child(odd)  { background: var(--surface); }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: var(--accent-light); transition: background 0.15s; }
+  tbody td {
+    padding: 10px 20px;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+  }
+  tbody td:first-child {
+    text-align: left;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--accent);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  .cov-chip {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    min-width: 46px;
+    text-align: center;
+  }
+  .cov-high { background: #fde8e8; color: #b91c1c; }
+  .cov-mid  { background: #fef3c7; color: #92400e; }
+  .cov-low  { background: #d1fae5; color: #065f46; }
+  .footer-note {
+    margin-top: 8px;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    padding: 0 4px;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<p class="page-title">Network Performance Research · WiFi-6 · BBR-FC (Custom-Tuned)</p>
+<h1 class="page-subtitle">BBR-FC Convergence Test — Statistical Summary</h1>
+
+<!-- TABLE 1: 6 Streams / 150 sec -->
+<div class="table-block">
+  <div class="table-label">
+    <span class="badge">Table 1</span>
+    <span class="title-text">BBR-FC convergence statistics for 150 sec</span>
+    <span class="meta">6 streams · staggered start · Δ20 s</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Stream</th>
+        <th>Start Time (s)</th>
+        <th>Mean μ (Mb/s)</th>
+        <th>Std Dev σ (Mb/s)</th>
+        <th>COV</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Stream 1</td><td>10.2</td><td>80.63</td><td>62.16</td><td><span class="cov-chip cov-high">0.77</span></td></tr>
+      <tr><td>Stream 2</td><td>30.2</td><td>51.43</td><td>23.64</td><td><span class="cov-chip cov-mid">0.46</span></td></tr>
+      <tr><td>Stream 3</td><td>50.2</td><td>46.80</td><td>17.12</td><td><span class="cov-chip cov-mid">0.37</span></td></tr>
+      <tr><td>Stream 4</td><td>70.2</td><td>46.50</td><td>18.83</td><td><span class="cov-chip cov-mid">0.40</span></td></tr>
+      <tr><td>Stream 5</td><td>90.2</td><td>36.48</td><td>7.85</td><td><span class="cov-chip cov-low">0.22</span></td></tr>
+      <tr><td>Stream 6</td><td>110.2</td><td>34.91</td><td>5.45</td><td><span class="cov-chip cov-low">0.16</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- TABLE 2: 8 Streams / 200 sec -->
+<div class="table-block">
+  <div class="table-label">
+    <span class="badge">Table 2</span>
+    <span class="title-text">BBR-FC convergence statistics for 200 sec</span>
+    <span class="meta">8 streams · staggered start · Δ20 s / Δ10 s</span>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Stream</th>
+        <th>Start Time (s)</th>
+        <th>Mean μ (Mb/s)</th>
+        <th>Std Dev σ (Mb/s)</th>
+        <th>COV</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Stream 1</td><td>10.1</td><td>60.86</td><td>54.16</td><td><span class="cov-chip cov-high">0.89</span></td></tr>
+      <tr><td>Stream 2</td><td>30.2</td><td>46.64</td><td>31.92</td><td><span class="cov-chip cov-high">0.68</span></td></tr>
+      <tr><td>Stream 3</td><td>50.2</td><td>37.53</td><td>20.54</td><td><span class="cov-chip cov-mid">0.55</span></td></tr>
+      <tr><td>Stream 4</td><td>70.2</td><td>30.43</td><td>12.76</td><td><span class="cov-chip cov-mid">0.42</span></td></tr>
+      <tr><td>Stream 5</td><td>90.2</td><td>27.09</td><td>9.49</td><td><span class="cov-chip cov-mid">0.35</span></td></tr>
+      <tr><td>Stream 6</td><td>110.2</td><td>24.70</td><td>7.17</td><td><span class="cov-chip cov-mid">0.29</span></td></tr>
+      <tr><td>Stream 7</td><td>120.3</td><td>22.34</td><td>4.61</td><td><span class="cov-chip cov-low">0.21</span></td></tr>
+      <tr><td>Stream 8</td><td>130.3</td><td>22.66</td><td>4.95</td><td><span class="cov-chip cov-low">0.22</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<p class="footer-note">
+  COV = σ/μ &nbsp;·&nbsp; Stats computed from stream activation time to end of test &nbsp;·&nbsp;
+  <span style="background:#fde8e8;color:#b91c1c;padding:1px 6px;border-radius:10px;font-size:11px;">≥0.5 high</span>&nbsp;
+  <span style="background:#fef3c7;color:#92400e;padding:1px 6px;border-radius:10px;font-size:11px;">0.2–0.5 moderate</span>&nbsp;
+  <span style="background:#d1fae5;color:#065f46;padding:1px 6px;border-radius:10px;font-size:11px;">&lt;0.2 low</span>
+</p>
+
+</body>
+</html>
